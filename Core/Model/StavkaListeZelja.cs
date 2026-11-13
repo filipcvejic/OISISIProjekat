@@ -1,40 +1,35 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Core.Serialization;
+﻿using Core.Serialization;
 
-namespace Core.Model
+namespace Core.Model;
+
+public class StavkaListeZelja : ISerializable
 {
-    public class StavkaListeZelja : ISerializable
+    public int PosetilacId { get; set; }
+    public int KnjigaId { get; set; }
+
+    public StavkaListeZelja()
     {
-        public int PosetilacId { get; set; }
-        public int KnjigaId { get; set; }
+    }
 
-        public StavkaListeZelja()
-        {
-        }
+    public StavkaListeZelja(int posetilacId, int knjigaId)
+    {
+        PosetilacId = posetilacId;
+        KnjigaId = knjigaId;
+    }
 
-        public StavkaListeZelja(int posetilacId, int knjigaId)
+    public string[] ToCSV()
+    {
+        string[] csvValues =
         {
-            PosetilacId = posetilacId;
-            KnjigaId = knjigaId;
-        }
-
-        public string[] ToCSV()
-        {
-            string[] csvValues =
-            {
             PosetilacId.ToString(),
             KnjigaId.ToString()
         };
-            return csvValues;
-        }
+        return csvValues;
+    }
 
-        public void FromCSV(string[] values)
-        {
-            PosetilacId = int.Parse(values[0]);
-            KnjigaId = int.Parse(values[1]);
-        }
+    public void FromCSV(string[] values)
+    {
+        PosetilacId = int.Parse(values[0]);
+        KnjigaId = int.Parse(values[1]);
     }
 }
